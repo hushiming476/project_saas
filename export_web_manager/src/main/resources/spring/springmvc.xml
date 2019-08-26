@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+
+    <!--1.开启注解扫描:web-->
+    <context:component-scan base-package="cn.itcast.web"/>
+
+     <!--2.配置视图解析器-->
+  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="prefix" value="/WEB-INF/pages/"/>
+      <property name="suffix" value=".jsp"/>
+  </bean>
+
+    <!--3.开启注解驱动-->
+    <mvc:annotation-driven conversion-service="conversionServiceFactory"/>
+
+    <!--4.日期转换类型:ConversionServiceFactoryBean-->
+    <bean id="conversionServiceFactory" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <ref bean="stringToDateConverter"/>
+            </set>
+        </property>
+    </bean>
+
+    <!--5.开启AOP自动代理-->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+    <!--6. dubbo 支持-->
+    <!--6.1 客户端项目名称-->
+    <dubbo:application name="export_web_manager">
+        <dubbo:parameter key="qos.enable" value="false"/>
+    </dubbo:application>
+
+    <!--6.2 配置注册中心地址-->
+    <!--使用虚拟机地址：192.168.233.128-->
+    <!--使用window则用：localhost-->
+    <dubbo:registry address="zookeeper://192.168.233.99:2181"/>
+    <!--6.3 dubbo注解扫描-->
+    <dubbo:annotation package="cn.itcast.web.controller"/>
+
+    <!--7.文件上传解析器配置(id 固定)-->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10485760"/>
+    </bean>
+</beans>

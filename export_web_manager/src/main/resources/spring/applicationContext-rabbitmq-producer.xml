@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/rabbit
+       http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--配置连接-->
+    <rabbit:connection-factory
+            id="connectionFactory"
+            host="localhost"
+            port="5672"
+            username="heima"
+            password="888"
+            virtual-host="/itcast"/>
+
+    <!--配置RabbitAdmin-->
+    <rabbit:admin connection-factory="connectionFactory" />
+
+    <!--配置队列名-->
+    <rabbit:queue name="myQueue"/>
+
+    <!--配置topic类型exchange；队列绑定到交换机-->
+    <rabbit:topic-exchange name="myExchange">
+        <rabbit:bindings>
+            <rabbit:binding queue="myQueue" pattern="msg.#" />
+        </rabbit:bindings>
+    </rabbit:topic-exchange>
+
+    <!--配置RabbitTemplate-->
+    <rabbit:template id="rabbitTemplate" connection-factory="connectionFactory"
+                     exchange="myExchange" message-converter="jsonMessageConverter"/>
+
+    <!-- 消息对象json转换类 -->
+    <bean id="jsonMessageConverter"
+          class="org.springframework.amqp.support.converter.Jackson2JsonMessageConverter" />
+</beans>

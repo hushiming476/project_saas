@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--开启SpringMVC注解扫描，扫描@Controller注解-->
+    <context:component-scan base-package="cn.itcast.web"/>
+    <!--SpringMVC注解驱动-->
+    <mvc:annotation-driven/>
+
+
+    <!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+    <dubbo:application name="dubbodemo_consumer">
+        <dubbo:parameter key="qos.enable" value="false"></dubbo:parameter>
+    </dubbo:application>
+
+
+    <!--配置注册中心地址-->
+    <!--使用虚拟机地址：192.168.233.128-->
+    <!--使用window则用：localhost-->
+    <dubbo:registry address="zookeeper://192.168.233.99:2181"/>
+
+    <!--开启dubbo注解扫描(@Reference注解)-->
+    <dubbo:annotation package="cn.itcast.web"/>
+
+</beans>

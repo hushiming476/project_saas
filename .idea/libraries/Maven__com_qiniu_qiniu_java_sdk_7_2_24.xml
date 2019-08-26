@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.qiniu:qiniu-java-sdk:7.2.24">
+    <CLASSES>
+      <root url="jar://D:/reponsitory_boot/com/qiniu/qiniu-java-sdk/7.2.24/qiniu-java-sdk-7.2.24.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://D:/reponsitory_boot/com/qiniu/qiniu-java-sdk/7.2.24/qiniu-java-sdk-7.2.24-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://D:/reponsitory_boot/com/qiniu/qiniu-java-sdk/7.2.24/qiniu-java-sdk-7.2.24-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

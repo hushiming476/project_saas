@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.system.RoleDao">
+    <resultMap id="BaseResultMap" type="cn.itcast.domain.system.Role">
+        <id column="role_id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="remark" property="remark"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="company_id" property="companyId"/>
+        <result column="company_name" property="companyName"/>
+    </resultMap>
+
+    <!--查询全部-->
+    <select id="findAll" resultMap="BaseResultMap">
+        select * from pe_role where company_id=#{companyId}
+    </select>
+
+    <!--根据id查询-->
+    <select id="findById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from pe_role where role_id = #{id}
+    </select>
+
+    <!--删除-->
+    <delete id="delete">
+        delete from pe_role where role_id = #{id}
+    </delete>
+
+    <!--保存-->
+    <insert id="save">
+        insert into pe_role
+        (
+        role_id,
+        name,
+        remark,
+        order_no,
+        company_id,
+        company_name
+        )
+        values
+        (
+        #{id},
+        #{name},
+        #{remark},
+        #{orderNo},
+        #{companyId},
+        #{companyName}
+        )
+    </insert>
+
+    <!--更新-->
+    <update id="update">
+        update pe_role
+        set name = #{name},
+        remark = #{remark},
+        order_no = #{orderNo}
+        where role_id = #{id}
+    </update>
+
+    <!--解除角色权限关系-->
+    <delete id="deleteRoleModuleByRoleId">
+        DELETE FROM pe_role_module WHERE role_id=#{roleId}
+    </delete>
+
+    <!--角色分配权限-->
+    <!--注意：如果dao接口方法参数有多个，需要使用@Param注解建立方法形参与占位符参数的映射关系。-->
+    <insert id="saveRoleModule">
+        INSERT INTO pe_role_module(role_id,module_id)VALUES(#{roleId},#{moduleId})
+    </insert>
+
+    <select id="findRoleByUserId" resultMap="BaseResultMap">
+        SELECT
+          r.*
+        FROM pe_role r,pe_role_user ru
+        WHERE 1=1
+          AND r.role_id=ru.role_id
+          AND ru.user_id=#{userId}
+    </select>
+</mapper>

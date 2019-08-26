@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace 指定对哪个接口文件进行映射-->
+<mapper namespace="cn.itcast.dao.stat.StatDao">
+
+    <!--需求1：根据生产厂家统计货物销售金额-->
+    <select id="getFactorySale" resultType="map">
+        SELECT
+        factory_name name,
+        SUM(amount) value
+        FROM co_contract_product
+        WHERE 1=1
+        AND company_id=#{companyId}
+        AND factory_name IS NOT NULL
+        GROUP BY factory_name
+    </select>
+
+    <!--需求2：产品销售排行，前5-->
+    <select id="getProductSale" resultType="map">
+        SELECT
+        product_no name,SUM(amount) value
+        FROM co_contract_product
+        WHERE company_id=#{arg0}
+        GROUP BY product_no
+        ORDER BY VALUE DESC
+        LIMIT #{arg1}
+    </select>
+
+    <!--需求3：按小时统计访问人数-->
+    <select id="getOnline" resultType="map">
+        SELECT o.a1 name,IFNULL(p.num,0) value FROM st_online_info o
+        LEFT JOIN (
+        SELECT DATE_FORMAT(TIME,'%H') HOUR,COUNT(1) num FROM st_sys_log GROUP BY HOUR
+        ) p ON o.a1=p.hour
+    </select>
+
+</mapper>

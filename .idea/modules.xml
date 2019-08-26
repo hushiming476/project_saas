@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/export_cargo_interface/export_cargo_interface.iml" filepath="$PROJECT_DIR$/export_cargo_interface/export_cargo_interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/export_cargo_service/export_cargo_service.iml" filepath="$PROJECT_DIR$/export_cargo_service/export_cargo_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/export_company__interface/export_company_interface.iml" filepath="$PROJECT_DIR$/export_company__interface/export_company_interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/export_company_interface/export_company_interface.iml" filepath="$PROJECT_DIR$/export_company_interface/export_company_interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/export_company_service/export_company_service.iml" filepath="$PROJECT_DIR$/export_company_service/export_company_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/export_dao/export_dao.iml" filepath="$PROJECT_DIR$/export_dao/export_dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/export_domain/export_domain.iml" filepath="$PROJECT_DIR$/export_domain/export_domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/export_mq_consumer/export_mq_consumer.iml" filepath="$PROJECT_DIR$/export_mq_consumer/export_mq_consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/export_parent.iml" filepath="$PROJECT_DIR$/export_parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/export_stat_interface/export_stat_interface.iml" filepath="$PROJECT_DIR$/export_stat_interface/export_stat_interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/export_stat_service/export_stat_service.iml" filepath="$PROJECT_DIR$/export_stat_service/export_stat_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/export_system_service/export_system_service.iml" filepath="$PROJECT_DIR$/export_system_service/export_system_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/export_web_manager/export_web_manager.iml" filepath="$PROJECT_DIR$/export_web_manager/export_web_manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/export_web_portal/export_web_portal.iml" filepath="$PROJECT_DIR$/export_web_portal/export_web_portal.iml" />
+    </modules>
+  </component>
+</project>
